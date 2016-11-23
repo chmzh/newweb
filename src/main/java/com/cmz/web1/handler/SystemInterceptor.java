@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cmz.web1.constant.URLConfig;
+
 public class SystemInterceptor implements HandlerInterceptor {
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -16,7 +18,10 @@ public class SystemInterceptor implements HandlerInterceptor {
 
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		// TODO Auto-generated method stub
+		if(modelAndView!=null && modelAndView.getModel()!=null){
+			modelAndView.getModel().put("home", URLConfig.HOME);
+			
+		}
 		
 	}
 
