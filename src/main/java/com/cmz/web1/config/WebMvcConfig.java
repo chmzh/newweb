@@ -18,6 +18,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.accept.ContentNegotiationManagerFactoryBean;
+import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
@@ -32,6 +33,8 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerView;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
+
+import com.cmz.web1.handler.SystemInterceptor;
 
 @Configuration
 @EnableWebMvc
@@ -70,6 +73,15 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		
 		return converter; 
 	}
+	@Bean
+	public HandlerInterceptor handlerInterceptor(){
+		SystemInterceptor interceptor = new SystemInterceptor();
+		
+		return interceptor;
+	}
+	
+	
+	
 	
 	@Bean
 	public FreeMarkerConfigurer freemarkerConfig(){
