@@ -17,6 +17,8 @@ import org.springframework.core.annotation.Order;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.mobile.device.DeviceHandlerMethodArgumentResolver;
+import org.springframework.mobile.device.DeviceResolverHandlerInterceptor;
 import org.springframework.web.accept.ContentNegotiationManagerFactoryBean;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.View;
@@ -89,7 +91,22 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		return interceptor;
 	}
 	
-	
+	/**
+	 * 支持手机
+	 * @return
+	 */
+	@Bean  
+    public DeviceResolverHandlerInterceptor deviceResolverHandlerInterceptor() {  
+        return new DeviceResolverHandlerInterceptor();  
+    }  
+	/**
+	 * 支持手机
+	 * @return
+	 */
+    @Bean  
+    public DeviceHandlerMethodArgumentResolver deviceHandlerMethodArgumentResolver() {  
+        return new DeviceHandlerMethodArgumentResolver();  
+    } 
 	
 	
 	@Bean
