@@ -1,10 +1,15 @@
 package com.cmz.web1.config;
 
+import java.util.EnumSet;
+
+import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
+import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.FilterRegistration.Dynamic;
 
+import org.springframework.mobile.device.DeviceResolverRequestFilter;
 import org.springframework.util.ClassUtils;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
@@ -51,12 +56,16 @@ public class ServletInitializer extends AbstractDispatcherServletInitializer {
 	
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
-		
-		super.onStartup(servletContext);
 		CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
 		characterEncodingFilter.setEncoding("UTF-8");
 		characterEncodingFilter.setForceEncoding(true);
 		servletContext.addFilter("characterEncodingFilter", characterEncodingFilter).addMappingForUrlPatterns(null, false, "/*");
+		FilterRegistration.Dynamic filterDynamic = servletContext.addFilter("deviceResolverRequestFilter", new DeviceResolverRequestFilter());
+        EnumSet<DispatcherType> dispatcherTypes = EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD);
+        filterDynamic.addMappingForUrlPatterns(dispatcherTypes, true, "/*");
+		
+		super.onStartup(servletContext);
+		
 		//		DelegatingFilterProxy filter = new DelegatingFilterProxy("springSecurityFilterChain");
 //		filter.setContextAttribute("org.springframework.web.servlet.FrameworkServlet.CONTEXT.dispatcher");
 //		servletContext.addFilter("springSecurityFilterChain", filter).addMappingForUrlPatterns(null, false, "/*");

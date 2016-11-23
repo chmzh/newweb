@@ -1,9 +1,12 @@
 package com.cmz.web1.controller;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mobile.device.Device;
+import org.springframework.mobile.device.DeviceUtils;
+import org.springframework.mobile.device.site.SitePreference;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +40,9 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/test")  
-    public String test(Device device) {  
+    public String test(HttpServletRequest request) {  
+		Device device = DeviceUtils.getCurrentDevice(request);
+		
         if (device.isMobile()) {  
             System.out.println("Hello mobile user!");  
         } else if (device.isTablet()) {  

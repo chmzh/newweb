@@ -19,6 +19,9 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.mobile.device.DeviceHandlerMethodArgumentResolver;
 import org.springframework.mobile.device.DeviceResolverHandlerInterceptor;
+import org.springframework.mobile.device.DeviceWebArgumentResolver;
+import org.springframework.mobile.device.site.SitePreferenceHandlerMethodArgumentResolver;
+import org.springframework.mobile.device.view.LiteDeviceDelegatingViewResolver;
 import org.springframework.web.accept.ContentNegotiationManagerFactoryBean;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -30,6 +33,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
+import org.springframework.web.servlet.mvc.method.annotation.ServletWebArgumentResolverAdapter;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
@@ -109,16 +113,43 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     public DeviceHandlerMethodArgumentResolver deviceHandlerMethodArgumentResolver() {  
         return new DeviceHandlerMethodArgumentResolver();  
     } 
+    
+    public DeviceWebArgumentResolver deviceWebArgumentResolver(){
+    	return new DeviceWebArgumentResolver();
+    }
+    
+    @Bean
+    public LiteDeviceDelegatingViewResolver liteDeviceAwareViewResolver() {
+        InternalResourceViewResolver delegate = 
+                new InternalResourceViewResolver();
+        delegate.setPrefix("/WEB-INF/views/");
+        delegate.setSuffix(".jsp");
+        LiteDeviceDelegatingViewResolver resolver = 
+                new LiteDeviceDelegatingViewResolver(delegate);
+        resolver.setMobilePrefix("mobile/");
+        resolver.setTabletPrefix("tablet/");
+        return resolver;
+    }
+
+    
+    @Bean
+    public SitePreferenceHandlerMethodArgumentResolver 
+            sitePreferenceHandlerMethodArgumentResolver() {
+        return new SitePreferenceHandlerMethodArgumentResolver();
+    }
 	
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(deviceResolverHandlerInterceptor());
+
     }
 	
     @Override
     public void addArgumentResolvers(
             List<HandlerMethodArgumentResolver> argumentResolvers) {
         argumentResolvers.add(deviceHandlerMethodArgumentResolver());
+        argumentResolvers.add(sitePreferenceHandlerMethodArgumentResolver());
+        argumentResolvers.add(new ServletWebArgumentResolverAdapter(deviceWebArgumentResolver()));
     }
     
     
