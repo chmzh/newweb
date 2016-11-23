@@ -1,7 +1,10 @@
 package com.cmz.web1.config;
 
+import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -12,12 +15,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.accept.ContentNegotiationManagerFactoryBean;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
@@ -38,7 +44,33 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		//aa
 		return new PropertySourcesPlaceholderConfigurer();
 	}
-
+	
+	/**
+	 * @ResponseBody 编码问题
+	 * @param stringHttpMessageConverter
+	 * @return
+	 */
+	@Bean
+	public RequestMappingHandlerAdapter requestMappingHandlerAdapter(StringHttpMessageConverter stringHttpMessageConverter){
+		RequestMappingHandlerAdapter adapter = new RequestMappingHandlerAdapter();
+		List<HttpMessageConverter<?>> converters = new ArrayList<HttpMessageConverter<?>>();
+		converters.add(stringHttpMessageConverter);
+		adapter.setMessageConverters(converters);
+		return adapter;
+	}
+	
+	@Bean
+	public StringHttpMessageConverter stringHttpMessageConverter(){
+		StringHttpMessageConverter converter = new StringHttpMessageConverter(Charset.forName("UTF-8"));
+		List<MediaType> supportedMediaTypes = new ArrayList<MediaType>();
+		supportedMediaTypes.add(MediaType.parseMediaType("text/plain;charset=UTF-8"));
+		supportedMediaTypes.add(MediaType.parseMediaType("text/html;charset=UTF-8"));
+		supportedMediaTypes.add(MediaType.parseMediaType("applicaiton/javascript;charset=UTF-8"));
+		converter.setSupportedMediaTypes(supportedMediaTypes);
+		
+		return converter; 
+	}
+	
 	@Bean
 	public FreeMarkerConfigurer freemarkerConfig(){
 		FreeMarkerConfigurer configurer = new FreeMarkerConfigurer();

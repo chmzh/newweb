@@ -21,6 +21,12 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@RequestMapping("hello1")
+	@ResponseBody
+	public String showBody(){
+		return "你好";
+	}
+	
 	@RequestMapping("hello")
 	//@ResponseBody
 	public String show(Model model){
