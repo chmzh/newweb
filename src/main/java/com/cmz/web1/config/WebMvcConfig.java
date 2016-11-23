@@ -3,6 +3,7 @@ package com.cmz.web1.config;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfig;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerView;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 @Configuration
@@ -30,7 +32,7 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 @ComponentScan(basePackages={"com.cmz.web1.controller","com.cmz.web1.service"})
 //@Order(2)
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
-	
+	 
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
 		return new PropertySourcesPlaceholderConfigurer();
@@ -40,6 +42,10 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	public FreeMarkerConfigurer freemarkerConfig(){
 		FreeMarkerConfigurer configurer = new FreeMarkerConfigurer();
 		configurer.setTemplateLoaderPath("/WEB-INF/views/");
+		Properties settings = new Properties();
+		settings.setProperty("default_encoding", "UTF-8");
+		settings.setProperty("locale", "zh_CN");
+		configurer.setFreemarkerSettings(settings);
 		configurer.setDefaultEncoding("UTF-8");
 		return configurer;
 	}
@@ -51,21 +57,23 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		//InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
 		//viewResolver.setPrefix("/WEB-INF/jsp/");
 		//viewResolver.setSuffix(".jsp");
-		UrlBasedViewResolver urlBasedViewResolver = new UrlBasedViewResolver();
+		UrlBasedViewResolver freeMarkerViewResolver = new UrlBasedViewResolver();
 		//urlBasedViewResolver.setPrefix("/WEB-INF/views/");
-		urlBasedViewResolver.setSuffix(".html");
-		Map<String, String> attributes = new HashMap<String, String>();
-		attributes.put("input.encoding", "UTF-8");
-		attributes.put("output.encoding", "UTF-8");
-		urlBasedViewResolver.setAttributesMap(attributes);
-		urlBasedViewResolver.setViewClass(FreeMarkerView.class);
+		freeMarkerViewResolver.setSuffix(".html");
+		//Map<String, String> attributes = new HashMap<String, String>();
+		//attributes.put("contentType", "text/html; charset=utf-8");
+		//freeMarkerViewResolver.setAttributesMap(attributes);
+		//freeMarkerViewResolver.setViewNames("*.html");
+		freeMarkerViewResolver.setContentType("text/html; charset=utf-8");
+		//freeMarkerViewResolver.setExposeRequestAttributes(true);
+		freeMarkerViewResolver.setViewClass(FreeMarkerView.class);
 		
 		MappingJackson2JsonView defaultView = new MappingJackson2JsonView();
 		defaultView.setExtractValueFromSingleKeyModel(true);
 	
 		ContentNegotiatingViewResolver contentViewResolver = new ContentNegotiatingViewResolver();
 		contentViewResolver.setContentNegotiationManager(contentNegotiationManager.getObject());
-		contentViewResolver.setViewResolvers(Arrays.<ViewResolver> asList(urlBasedViewResolver));
+		contentViewResolver.setViewResolvers(Arrays.<ViewResolver> asList(freeMarkerViewResolver));
 		contentViewResolver.setDefaultViews(Arrays.<View> asList(defaultView));
 		return contentViewResolver;
 	}
