@@ -25,6 +25,7 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
@@ -73,6 +74,14 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		
 		return converter; 
 	}
+	
+	@Bean
+	public RequestMappingHandlerMapping requestMappingHandlerMapping(HandlerInterceptor handlerInterceptor){
+		RequestMappingHandlerMapping mapping = new RequestMappingHandlerMapping();
+		mapping.setInterceptors(handlerInterceptor);
+		return mapping;
+	}
+	
 	@Bean
 	public HandlerInterceptor handlerInterceptor(){
 		SystemInterceptor interceptor = new SystemInterceptor();
