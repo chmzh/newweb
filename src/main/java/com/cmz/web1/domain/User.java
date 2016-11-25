@@ -1,6 +1,12 @@
 package com.cmz.web1.domain;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3937095560661192360L;
 	private int id;
 	private String name;
 	public int getId() {
