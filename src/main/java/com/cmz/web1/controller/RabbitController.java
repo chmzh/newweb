@@ -17,5 +17,6 @@ public class RabbitController {
 	public void index(){
 		
 		rabbitClient.sendMessage("a","b","message1");
+		rabbitClient.sendMessage("a2", "message2");
 	}
 }

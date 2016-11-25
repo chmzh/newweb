@@ -1,32 +1,13 @@
 package com.cmz.web1.config;
 
-import javax.sql.DataSource;
-
-import org.apache.commons.dbcp2.BasicDataSource;
-import org.mybatis.spring.SqlSessionFactoryBean;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.ComponentScans;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.annotation.Order;
-import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.cmz.web1.data.util.ImpalaClient;
 import com.cmz.web1.data.util.RabbitClient;
-import com.cmz.web1.data.util.RedisClient;
-
-import redis.clients.jedis.JedisPoolConfig;
 
 @Configuration
 @PropertySource("/WEB-INF/conf/rabbit.properties")
@@ -44,6 +25,8 @@ public class RabbitManager {
 	@Value("${rmq.manager.password}")
 	private String rmqManagerPassword;
 	
+	final static String queueName = "spring-boot";
+	
 	@Bean
 	public CachingConnectionFactory cachingConnectionFactory(){
 		CachingConnectionFactory factory = new CachingConnectionFactory();
@@ -51,14 +34,32 @@ public class RabbitManager {
 		factory.setPort(rmqPort);
 		factory.setUsername(rmqManagerUser);
 		factory.setPassword(rmqManagerPassword);
-		
 		return factory;
 	}
+	
+//	@Bean
+//    public SimpleMessageListenerContainer simpleMessageListenerContainer(ConnectionFactory connectionFactory,
+//    		MessageListener messageListener) {
+//        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
+//        container.setConnectionFactory(connectionFactory);
+//        container.setQueueNames(queueName);
+//        container.setMessageListener(messageListener);
+//        return container;
+//    }
+//	@Bean
+//	public MessageListener messageListener(){
+//		MessageReceiver receiver = new MessageReceiver();
+//		
+//		return receiver;
+//	}
+	
 	@Bean
 	public RabbitAdmin rabbitAdmin(CachingConnectionFactory cachingConnectionFactory){
 		RabbitAdmin rabbitAdmin = new RabbitAdmin(cachingConnectionFactory);
 		return rabbitAdmin;
 	}
+	
+
 	
 	@Bean
 	public RabbitClient rabbitClient(CachingConnectionFactory cachingConnectionFactory){
