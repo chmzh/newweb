@@ -1,9 +1,13 @@
 package com.cmz.web1.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.mobile.device.Device;
 import org.springframework.mobile.device.DeviceUtils;
 import org.springframework.mobile.device.site.SitePreference;
@@ -25,9 +29,13 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+	
 	@RequestMapping("hello1")
 	@ResponseBody
 	public String showBody(){
+		List<Map<String, Object>> lists = jdbcTemplate.queryForList("select * from log_test1.zh_consumeinfo where pdate='2016-11-14'");
 		return "你好";
 	}
 	

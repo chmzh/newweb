@@ -30,6 +30,6 @@ public class UserService {
 	
 	@Scheduled(cron="* * * * * ?")
 	public void startPayment(){
-		System.out.println("startPayment");
+		//System.out.println("startPayment");
 	}
 }
