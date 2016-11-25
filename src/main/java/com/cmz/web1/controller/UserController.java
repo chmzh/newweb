@@ -37,13 +37,14 @@ public class UserController {
 	@ResponseBody
 	public String showBody(){
 		List<Map<String, Object>> lists = impalaClient.queryForList("select * from log_test1.zh_consumeinfo where pdate='2016-11-14'");
+		System.out.println(lists);
 		return "你好";
 	}
 	
 	@RequestMapping("hello")
 	//@ResponseBody
 	public String show(Model model){
-		//userService.update();
+		userService.update();
 		model.addAttribute("content", "模型中文测试");
 		return "hello";
 	}
