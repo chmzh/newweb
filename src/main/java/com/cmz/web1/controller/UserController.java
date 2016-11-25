@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cmz.web1.data.util.ImpalaClient;
 import com.cmz.web1.service.UserService;
 
 @Controller
@@ -30,12 +31,12 @@ public class UserController {
 	private UserService userService;
 	
 	@Autowired
-	private JdbcTemplate jdbcTemplate;
+	private ImpalaClient impalaClient;
 	
 	@RequestMapping("hello1")
 	@ResponseBody
 	public String showBody(){
-		List<Map<String, Object>> lists = jdbcTemplate.queryForList("select * from log_test1.zh_consumeinfo where pdate='2016-11-14'");
+		List<Map<String, Object>> lists = impalaClient.queryForList("select * from log_test1.zh_consumeinfo where pdate='2016-11-14'");
 		return "你好";
 	}
 	

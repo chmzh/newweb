@@ -18,6 +18,8 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.cmz.web1.data.util.ImpalaClient;
+
 @Configuration
 @MapperScan("com.cmz.web1.dao")
 @PropertySource({"/WEB-INF/conf/jdbc.properties","/WEB-INF/conf/impala.properties"})
@@ -96,9 +98,9 @@ public class DataSourceManager {
     		return dataSource;
     }
     @Bean
-    public JdbcTemplate jdbcTemplate(){
-    		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-    		jdbcTemplate.setDataSource(impalaDataSource());
-    		return jdbcTemplate;
+    public ImpalaClient impalaClient(){
+    		ImpalaClient client = new ImpalaClient();
+    		client.setDataSource(impalaDataSource());
+    		return client;
     }
 }
