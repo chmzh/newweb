@@ -17,6 +17,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.mobile.device.DeviceHandlerMethodArgumentResolver;
 import org.springframework.mobile.device.DeviceResolverHandlerInterceptor;
 import org.springframework.mobile.device.DeviceWebArgumentResolver;
@@ -58,6 +59,20 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	}
 	
 	/**
+	 * 支持JSON
+	 * @return
+	 */
+	@Bean
+	public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter(){
+		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+		List<MediaType> supportedMediaTypes = new ArrayList<MediaType>();
+		supportedMediaTypes.add(MediaType.parseMediaType("application/json;charset=UTF-8"));
+		supportedMediaTypes.add(MediaType.parseMediaType("application/x-www-form-urlencoded;charset=UTF-8"));
+		converter.setSupportedMediaTypes(supportedMediaTypes);
+		return converter;
+	}
+	
+	/**
 	 * @ResponseBody 编码问题
 	 * @param stringHttpMessageConverter
 	 * @return
@@ -67,6 +82,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		RequestMappingHandlerAdapter adapter = new RequestMappingHandlerAdapter();
 		List<HttpMessageConverter<?>> converters = new ArrayList<HttpMessageConverter<?>>();
 		converters.add(stringHttpMessageConverter);
+		converters.add(mappingJackson2HttpMessageConverter());
 		adapter.setMessageConverters(converters);
 		return adapter;
 	}
