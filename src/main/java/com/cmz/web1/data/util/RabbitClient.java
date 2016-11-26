@@ -20,4 +20,8 @@ public class RabbitClient {
 		rabbitTemplate.convertAndSend(key,object);
 	}
 	
+	public void sendAndRec(String key,Object message){
+		Object object = rabbitTemplate.convertSendAndReceive(key, message);
+		System.out.println(object);
+	}
 }
