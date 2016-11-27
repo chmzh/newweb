@@ -44,7 +44,7 @@ public class UserController {
 	@RequestMapping("hello")
 	//@ResponseBody
 	public String show(Model model){
-		userService.update();
+		//userService.update();
 		model.addAttribute("content", "模型中文测试");
 		return "hello";
 	}
