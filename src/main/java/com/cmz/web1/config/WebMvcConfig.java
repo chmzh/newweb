@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScans;
@@ -189,7 +191,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	}
 
 	@Bean
-	public ContentNegotiatingViewResolver contentViewResolver() throws Exception {
+	public ContentNegotiatingViewResolver contentViewResolver(ServletContext context) throws Exception {
 		ContentNegotiationManagerFactoryBean contentNegotiationManager = new ContentNegotiationManagerFactoryBean();
 		contentNegotiationManager.addMediaType("json", MediaType.APPLICATION_JSON);
 
@@ -211,7 +213,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		// ServletContextTemplateResolver thymeleafResolver = new
 		// ServletContextTemplateResolver();
 		// =========================thymeleaf
-		SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
+		ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver(context);
 		templateResolver.setPrefix("/WEB-INF/thymeleaf/");
 		templateResolver.setSuffix(".html");
 		templateResolver.setCharacterEncoding("utf-8");
