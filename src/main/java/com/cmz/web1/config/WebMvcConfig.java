@@ -10,12 +10,16 @@ import java.util.Properties;
 
 import javax.servlet.ServletContext;
 
+import org.hibernate.validator.HibernateValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScans;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.annotation.Order;
+import org.springframework.core.convert.ConversionService;
+import org.springframework.format.support.FormattingConversionServiceFactoryBean;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -25,7 +29,10 @@ import org.springframework.mobile.device.DeviceResolverHandlerInterceptor;
 import org.springframework.mobile.device.DeviceWebArgumentResolver;
 import org.springframework.mobile.device.site.SitePreferenceHandlerMethodArgumentResolver;
 import org.springframework.mobile.device.view.LiteDeviceDelegatingViewResolver;
+import org.springframework.validation.Validator;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.accept.ContentNegotiationManagerFactoryBean;
+import org.springframework.web.bind.support.ConfigurableWebBindingInitializer;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.View;
@@ -33,6 +40,7 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
@@ -57,11 +65,46 @@ import com.cmz.web1.handler.SystemInterceptor;
 import freemarker.cache.FileTemplateLoader;
 
 @Configuration
-@EnableWebMvc
 @ComponentScan(basePackages = { "com.cmz.web1.controller", "com.cmz.web1.service" })
-// @Order(2)
+@EnableWebMvc
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
-
+	
+/*
+	@Bean
+	public ConfigurableWebBindingInitializer bindingInitializer(Validator validator,ConversionService conversionService){
+		ConfigurableWebBindingInitializer bindingInitializer = new ConfigurableWebBindingInitializer();
+		bindingInitializer.setValidator(validator);
+		bindingInitializer.setConversionService(conversionService);
+		return bindingInitializer;
+	}
+	*/
+	
+	@Bean
+	public Validator validator() {
+		LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
+		validator.setProviderClass(HibernateValidator.class);
+		validator.setValidationMessageSource(reloadableResourceBundleMessageSource());
+		return validator;
+	}
+	
+	@Bean
+	public FormattingConversionServiceFactoryBean conversionService(){
+		FormattingConversionServiceFactoryBean conversionServiceFactoryBean = new FormattingConversionServiceFactoryBean();
+		return conversionServiceFactoryBean;
+	}
+	
+	@Bean
+	public ReloadableResourceBundleMessageSource reloadableResourceBundleMessageSource(){
+		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+		messageSource.setBasename("/WEB-INF/conf/validatemessages");
+		Properties properties = new Properties();
+		properties.setProperty("fileEncodings", "utf-8");
+		messageSource.setFileEncodings(properties);
+		messageSource.setDefaultEncoding("utf-8");
+		messageSource.setCacheMillis(120);
+		return messageSource;
+	}
+	
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
 
@@ -194,7 +237,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	public ContentNegotiatingViewResolver contentViewResolver(ServletContext context) throws Exception {
 		ContentNegotiationManagerFactoryBean contentNegotiationManager = new ContentNegotiationManagerFactoryBean();
 		contentNegotiationManager.addMediaType("json", MediaType.APPLICATION_JSON);
-
+/*
 		// InternalResourceViewResolver viewResolver = new
 		// InternalResourceViewResolver();
 		// viewResolver.setPrefix("/WEB-INF/jsp/");
@@ -209,7 +252,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		freeMarkerViewResolver.setContentType("text/html; charset=utf-8");
 		// freeMarkerViewResolver.setExposeRequestAttributes(true);
 		freeMarkerViewResolver.setViewClass(FreeMarkerView.class);
-
+*/
 		// ServletContextTemplateResolver thymeleafResolver = new
 		// ServletContextTemplateResolver();
 		// =========================thymeleaf
@@ -235,7 +278,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 		ContentNegotiatingViewResolver contentViewResolver = new ContentNegotiatingViewResolver();
 		contentViewResolver.setContentNegotiationManager(contentNegotiationManager.getObject());
-		contentViewResolver.setViewResolvers(Arrays.<ViewResolver> asList(freeMarkerViewResolver,thymeleafResolver));
+		contentViewResolver.setViewResolvers(Arrays.<ViewResolver> asList(thymeleafResolver));
 		contentViewResolver.setDefaultViews(Arrays.<View> asList(defaultView));
 		return contentViewResolver;
 	}
