@@ -14,6 +14,7 @@ import org.springframework.util.ClassUtils;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.support.AbstractDispatcherServletInitializer;
 
 public class ServletInitializer extends AbstractDispatcherServletInitializer {
@@ -54,8 +55,11 @@ public class ServletInitializer extends AbstractDispatcherServletInitializer {
 //		return filters;
 //	}
 	
+	
+	
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
+		super.onStartup(servletContext);
 		CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
 		characterEncodingFilter.setEncoding("UTF-8");
 		characterEncodingFilter.setForceEncoding(true);
@@ -63,8 +67,9 @@ public class ServletInitializer extends AbstractDispatcherServletInitializer {
 		FilterRegistration.Dynamic filterDynamic = servletContext.addFilter("deviceResolverRequestFilter", new DeviceResolverRequestFilter());
         EnumSet<DispatcherType> dispatcherTypes = EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD);
         filterDynamic.addMappingForUrlPatterns(dispatcherTypes, true, "/*");
+        
+		//servletContext.addServlet("dispatcher", DispatcherServlet.class).addMapping("/*");
 		
-		super.onStartup(servletContext);
 		
 		//		DelegatingFilterProxy filter = new DelegatingFilterProxy("springSecurityFilterChain");
 //		filter.setContextAttribute("org.springframework.web.servlet.FrameworkServlet.CONTEXT.dispatcher");

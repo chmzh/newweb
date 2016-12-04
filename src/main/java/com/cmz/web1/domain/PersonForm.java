@@ -11,8 +11,8 @@ public class PersonForm {
 
 	
     private Integer age;
-	@NotNull
-    @Size(min=2, max=30,message="{person.name}")
+    @NotNull
+    @Size(min=2, max=30,message="person.name")
     public String getName() {
         return this.name;
     }
@@ -21,7 +21,7 @@ public class PersonForm {
         this.name = name;
     }
     @NotNull
-    @Min(18)
+    @Min(value=18,message="person.age")
     public Integer getAge() {
         return age;
     }

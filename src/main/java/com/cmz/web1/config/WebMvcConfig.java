@@ -15,10 +15,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScans;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.convert.ConversionService;
+import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.format.support.FormattingConversionServiceFactoryBean;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -77,7 +79,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		bindingInitializer.setConversionService(conversionService);
 		return bindingInitializer;
 	}
-	*/
+
 	
 	@Bean
 	public Validator validator() {
@@ -87,16 +89,16 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		return validator;
 	}
 	
-	@Bean
-	public FormattingConversionServiceFactoryBean conversionService(){
-		FormattingConversionServiceFactoryBean conversionServiceFactoryBean = new FormattingConversionServiceFactoryBean();
-		return conversionServiceFactoryBean;
-	}
+//	@Bean
+//	public ConversionService conversionService(){
+//		DefaultFormattingConversionService conversionServiceFactoryBean = new DefaultFormattingConversionService();
+//		return conversionServiceFactoryBean;
+//	}
 	
 	@Bean
 	public ReloadableResourceBundleMessageSource reloadableResourceBundleMessageSource(){
 		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-		messageSource.setBasename("/WEB-INF/conf/validatemessages");
+		messageSource.setBasename("classpath:messages");
 		Properties properties = new Properties();
 		properties.setProperty("fileEncodings", "utf-8");
 		messageSource.setFileEncodings(properties);
@@ -104,7 +106,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		messageSource.setCacheMillis(120);
 		return messageSource;
 	}
-	
+	*/
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
 
@@ -237,11 +239,12 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	public ContentNegotiatingViewResolver contentViewResolver(ServletContext context) throws Exception {
 		ContentNegotiationManagerFactoryBean contentNegotiationManager = new ContentNegotiationManagerFactoryBean();
 		contentNegotiationManager.addMediaType("json", MediaType.APPLICATION_JSON);
-/*
-		// InternalResourceViewResolver viewResolver = new
-		// InternalResourceViewResolver();
-		// viewResolver.setPrefix("/WEB-INF/jsp/");
-		// viewResolver.setSuffix(".jsp");
+
+		 InternalResourceViewResolver viewResolver = new
+		 InternalResourceViewResolver();
+		 viewResolver.setPrefix("/WEB-INF/jsp/");
+		 viewResolver.setSuffix(".jsp");
+		 /*
 		UrlBasedViewResolver freeMarkerViewResolver = new UrlBasedViewResolver();
 		// urlBasedViewResolver.setPrefix("/WEB-INF/views/");
 		freeMarkerViewResolver.setSuffix(".html");
@@ -255,7 +258,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 */
 		// ServletContextTemplateResolver thymeleafResolver = new
 		// ServletContextTemplateResolver();
-		// =========================thymeleaf
+		 /*
+		// =========================thymeleaf=============
 		ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver(context);
 		templateResolver.setPrefix("/WEB-INF/thymeleaf/");
 		templateResolver.setSuffix(".html");
@@ -272,13 +276,15 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		ThymeleafViewResolver thymeleafResolver = new ThymeleafViewResolver();
 		thymeleafResolver.setTemplateEngine(engine);
 		thymeleafResolver.setCharacterEncoding("utf-8");
-		// =========================thymeleaf
+		// =========================thymeleaf=============
+		 * */
+		 
 		MappingJackson2JsonView defaultView = new MappingJackson2JsonView();
 		defaultView.setExtractValueFromSingleKeyModel(true);
 
 		ContentNegotiatingViewResolver contentViewResolver = new ContentNegotiatingViewResolver();
 		contentViewResolver.setContentNegotiationManager(contentNegotiationManager.getObject());
-		contentViewResolver.setViewResolvers(Arrays.<ViewResolver> asList(thymeleafResolver));
+		contentViewResolver.setViewResolvers(Arrays.<ViewResolver> asList(viewResolver));
 		contentViewResolver.setDefaultViews(Arrays.<View> asList(defaultView));
 		return contentViewResolver;
 	}
