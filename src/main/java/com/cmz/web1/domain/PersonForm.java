@@ -3,7 +3,11 @@ package com.cmz.web1.domain;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
+/**
+ * 语言包位置 /WEB-INF/messages/message*.properties
+ * @author C
+ *
+ */
 public class PersonForm {
 
 	
