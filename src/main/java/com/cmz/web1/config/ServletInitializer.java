@@ -16,6 +16,10 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.support.AbstractDispatcherServletInitializer;
+import org.springframework.web.util.Log4jConfigListener;
+import org.springframework.web.util.WebAppRootListener;
+
+import com.cmz.web1.context.ContextUtil;
 
 public class ServletInitializer extends AbstractDispatcherServletInitializer {
 
@@ -67,6 +71,12 @@ public class ServletInitializer extends AbstractDispatcherServletInitializer {
 		FilterRegistration.Dynamic filterDynamic = servletContext.addFilter("deviceResolverRequestFilter", new DeviceResolverRequestFilter());
         EnumSet<DispatcherType> dispatcherTypes = EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD);
         filterDynamic.addMappingForUrlPatterns(dispatcherTypes, true, "/*");
+        servletContext.setInitParameter("webAppRootKey", "myweb.root");
+        servletContext.addListener(WebAppRootListener.class);
+        servletContext.setInitParameter("log4jConfigLocation", "/WEB-INF/conf/log4j.properties");
+        servletContext.addListener(Log4jConfigListener.class);
+        
+        ContextUtil.setServletContext(servletContext);
         
 		//servletContext.addServlet("dispatcher", DispatcherServlet.class).addMapping("/*");
 		
