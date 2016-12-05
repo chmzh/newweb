@@ -12,7 +12,12 @@ public class ContextUtil {
 	public static void setServletContext(ServletContext servletContext){
 		ContextUtil.servletContext = servletContext;
 	}
-	
+	/**
+	 * 获取网站根目录
+	 * @param path
+	 * @return
+	 * @throws FileNotFoundException
+	 */
 	public static String getPath(String path) throws FileNotFoundException{
 		return WebUtils.getRealPath(servletContext, path);
 	}
