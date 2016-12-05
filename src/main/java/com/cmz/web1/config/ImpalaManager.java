@@ -26,7 +26,7 @@ import com.cmz.web1.data.util.RedisClient;
 import redis.clients.jedis.JedisPoolConfig;
 
 @Configuration
-@PropertySource("/WEB-INF/conf/impala.properties")
+//@PropertySource("/WEB-INF/conf/impala.properties")
 // @Order(1)
 public class ImpalaManager {
 

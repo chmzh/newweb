@@ -27,7 +27,7 @@ import redis.clients.jedis.JedisPoolConfig;
 
 @Configuration
 @MapperScan("com.cmz.web1.dao")
-@PropertySource("/WEB-INF/conf/jdbc.properties")
+//@PropertySource("/WEB-INF/conf/jdbc.properties")
 @EnableTransactionManagement
 // @Order(1)
 public class MySQLManager {

@@ -13,6 +13,7 @@ import com.mongodb.Mongo;
 
 @Configuration
 public class MongoDBManager {
+	/*
 	@Bean
 	Mongo mongo() throws UnknownHostException{
 		Mongo mongo = new Mongo();
@@ -22,12 +23,12 @@ public class MongoDBManager {
 	
 	MongoDbFactory mongoDbFactory(){
 		MongoDbFactory mongoDbFactory = new SimpleMongoDbFactory(uri);
-		return mongoDbFactory
+		return mongoDbFactory;
 	}
 	
 	MongoTemplate mongoTemplate(){
 		MongoTemplate template = new MongoTemplate(mongoDbFactory);
 		return template;
 	}
-	
+	*/
 }

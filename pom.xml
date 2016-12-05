@@ -170,11 +170,13 @@
     <version>5.2.4.Final</version>
 </dependency> 
 <!-- https://mvnrepository.com/artifact/org.neo4j/neo4j -->
+<!--
 <dependency>
     <groupId>org.neo4j</groupId>
     <artifactId>neo4j</artifactId>
     <version>3.1.0-M10</version>
 </dependency>
+-->
 <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-mongodb -->
  <dependency>
     <groupId>org.springframework.data</groupId>

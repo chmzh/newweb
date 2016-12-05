@@ -4,13 +4,16 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:cache="http://www.springframework.org/schema/cache"
 	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
 	xsi:schemaLocation="
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
         http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.0.xsd
         http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.0.xsd
-        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+        http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
+        ">
 
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
@@ -37,4 +40,39 @@
 		<property name="cacheSeconds" value="120" />
 	</bean> 
 	<mvc:annotation-driven validator="validator"/>
+	
+	<!-- 属性文件位置 -->
+     <bean id="annotationPropertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>/WEB-INF/conf/mongodb.properties</value>
+                <value>/WEB-INF/conf/jdbc.properties</value>
+                <value>/WEB-INF/conf/impala.properties</value>
+                <value>/WEB-INF/conf/rabbit.properties</value>
+                <value>/WEB-INF/conf/redis.properties</value>
+            </list>
+        </property>
+    </bean> 
+	
+	 <!-- 定义mongo对象，对应的是mongodb官方jar包中的Mongo，replica-set设置集群副本的ip地址和端口 -->
+     <mongo:mongo id="mongo" replica-set="${mongo.hostport}">
+        <mongo:options 
+         connections-per-host="${mongo.connectionsPerHost}" 
+         threads-allowed-to-block-for-connection-multiplier="${mongo.threadsAllowedToBlockForConnectionMultiplier}"
+         connect-timeout="${mongo.connectTimeout}" 
+         max-wait-time="${mongo.maxWaitTime}" 
+         auto-connect-retry="${mongo.autoConnectRetry}" 
+         socket-keep-alive="${mongo.socketKeepAlive}" 
+         socket-timeout="${mongo.socketTimeout}" 
+         slave-ok="${mongo.slaveOk}" 
+         write-number="1" 
+         write-timeout="0" 
+         write-fsync="true" />
+    </mongo:mongo>
+    <mongo:db-factory dbname="database" mongo-ref="mongo" />
+
+    <bean class="org.springframework.data.mongodb.core.MongoTemplate">
+        <constructor-arg ref="mongo" />
+        <constructor-arg name="databaseName" value="db_mongo" />
+    </bean> 
 </beans>

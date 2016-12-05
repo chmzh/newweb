@@ -18,7 +18,7 @@ import com.cmz.web1.data.util.RabbitClient;
 import com.cmz.web1.handler.MessageReceiver;
 
 @Configuration
-@PropertySource("/WEB-INF/conf/rabbit.properties")
+//@PropertySource("/WEB-INF/conf/rabbit.properties")
 // @Order(1)
 public class RabbitManager {
 
