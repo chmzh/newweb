@@ -68,6 +68,7 @@ import freemarker.cache.FileTemplateLoader;
 
 @Configuration
 @ComponentScan(basePackages = { "com.cmz.web1.mongodb.dao","com.cmz.web1.controller", "com.cmz.web1.service" })
+//@ComponentScan(basePackages = {"com.cmz.web1.controller", "com.cmz.web1.service" })
 @EnableWebMvc
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	

@@ -8,15 +8,16 @@ import com.mongodb.DBCollection;
 
 @Repository
 public class MUserDao {
-	@Autowired
-	private MongoTemplate mongoTemplate;
-	
+//	@Autowired
+//	private MongoTemplate mongoTemplate;
+//	
 	public String getUser(){
-		DBCollection collection = mongoTemplate.createCollection("user");
-		return collection.getName();
+		//DBCollection collection = mongoTemplate.createCollection("user");
+		//return collection.getName();
+		return "";
 	}
-	
-	public void addUser(){
-		//mongoTemplate.insert(objectToSave, collectionName);
-	}
+//	
+//	public void addUser(){
+//		//mongoTemplate.insert(objectToSave, collectionName);
+//	}
 }

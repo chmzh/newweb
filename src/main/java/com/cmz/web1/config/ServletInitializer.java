@@ -68,13 +68,14 @@ public class ServletInitializer extends AbstractDispatcherServletInitializer {
 		characterEncodingFilter.setEncoding("UTF-8");
 		characterEncodingFilter.setForceEncoding(true);
 		servletContext.addFilter("characterEncodingFilter", characterEncodingFilter).addMappingForUrlPatterns(null, false, "/*");
-		FilterRegistration.Dynamic filterDynamic = servletContext.addFilter("deviceResolverRequestFilter", new DeviceResolverRequestFilter());
-        EnumSet<DispatcherType> dispatcherTypes = EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD);
-        filterDynamic.addMappingForUrlPatterns(dispatcherTypes, true, "/*");
+		//FilterRegistration.Dynamic filterDynamic = servletContext.addFilter("deviceResolverRequestFilter", new DeviceResolverRequestFilter());
+        //EnumSet<DispatcherType> dispatcherTypes = EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD);
+        //filterDynamic.addMappingForUrlPatterns(dispatcherTypes, true, "/*");
+		
         servletContext.setInitParameter("webAppRootKey", "myweb.root");
         servletContext.addListener(WebAppRootListener.class);
         servletContext.setInitParameter("log4jConfigLocation", "/WEB-INF/conf/log4j.properties");
-        servletContext.setInitParameter("log4jRefreshInterval", "2000"); //2秒检查一次日志等级的改变
+        //servletContext.setInitParameter("log4jRefreshInterval", "2000"); //2秒检查一次日志等级的改变
         servletContext.addListener(Log4jConfigListener.class);
         
         ContextUtil.setServletContext(servletContext);
