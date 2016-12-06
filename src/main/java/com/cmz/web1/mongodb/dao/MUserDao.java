@@ -15,4 +15,8 @@ public class MUserDao {
 		DBCollection collection = mongoTemplate.createCollection("user");
 		return collection.getName();
 	}
+	
+	public void addUser(){
+		//mongoTemplate.insert(objectToSave, collectionName);
+	}
 }
