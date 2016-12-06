@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<base href="${home}"/> 
+<base th:href="${home}"/> 
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
@@ -13,7 +13,7 @@
 <body>
 thymeleaf<br>
 hello 页面中文测试<br>
-${content} 
+<p th:text="${content}"></p> 
 
 <!-- 标准的按钮 -->
 <button type="button" class="btn btn-default">默认按钮</button>
