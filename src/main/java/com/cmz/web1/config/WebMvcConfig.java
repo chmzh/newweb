@@ -170,21 +170,14 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		return interceptor;
 	}
 
-	/**
-	 * 支持手机
-	 * 
-	 * @return
-	 */
+	/*
 	@Bean
 	public DeviceResolverHandlerInterceptor deviceResolverHandlerInterceptor() {
 		return new DeviceResolverHandlerInterceptor();
 	}
 
-	/**
-	 * 支持手机
-	 * 
-	 * @return
-	 */
+
+	
 	@Bean
 	public DeviceHandlerMethodArgumentResolver deviceHandlerMethodArgumentResolver() {
 		return new DeviceHandlerMethodArgumentResolver();
@@ -222,7 +215,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		argumentResolvers.add(sitePreferenceHandlerMethodArgumentResolver());
 		argumentResolvers.add(new ServletWebArgumentResolverAdapter(deviceWebArgumentResolver()));
 	}
-
+	*/
 	@Bean
 	public FreeMarkerConfigurer freemarkerConfig() {
 		FreeMarkerConfigurer configurer = new FreeMarkerConfigurer();
