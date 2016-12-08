@@ -40,7 +40,10 @@
 		<property name="cacheSeconds" value="120" />
 	</bean> 
 	<mvc:annotation-driven validator="validator"/>
-	
+	<mvc:interceptors>
+ 	<bean class="com.cmz.web1.handler.SystemInterceptor">
+ 	</bean>
+ 	</mvc:interceptors>
 	<!-- 属性文件位置 -->
      <bean id="annotationPropertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">

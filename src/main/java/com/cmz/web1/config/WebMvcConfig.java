@@ -157,19 +157,19 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		return converter;
 	}
 
-	@Bean
-	public RequestMappingHandlerMapping requestMappingHandlerMapping(HandlerInterceptor handlerInterceptor) {
-		RequestMappingHandlerMapping mapping = new RequestMappingHandlerMapping();
-		mapping.setInterceptors(handlerInterceptor);
-		return mapping;
-	}
-
-	@Bean
-	public HandlerInterceptor handlerInterceptor() {
-		SystemInterceptor interceptor = new SystemInterceptor();
-
-		return interceptor;
-	}
+//	@Bean
+//	public RequestMappingHandlerMapping requestMappingHandlerMapping(HandlerInterceptor handlerInterceptor) {
+//		RequestMappingHandlerMapping mapping = new RequestMappingHandlerMapping();
+//		mapping.setInterceptors(handlerInterceptor);
+//		return mapping;
+//	}
+//
+//	@Bean
+//	public HandlerInterceptor handlerInterceptor() {
+//		SystemInterceptor interceptor = new SystemInterceptor();
+//
+//		return interceptor;
+//	}
 
 	/*
 	@Bean
@@ -278,7 +278,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 		ContentNegotiatingViewResolver contentViewResolver = new ContentNegotiatingViewResolver();
 		contentViewResolver.setContentNegotiationManager(contentNegotiationManager.getObject());
-		contentViewResolver.setViewResolvers(Arrays.<ViewResolver> asList(freeMarkerViewResolver,thymeleafResolver));
+		contentViewResolver.setViewResolvers(Arrays.<ViewResolver> asList(thymeleafResolver));
 		contentViewResolver.setDefaultViews(Arrays.<View> asList(defaultView));
 		return contentViewResolver;
 	}
