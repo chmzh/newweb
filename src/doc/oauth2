@@ -1,0 +1,11 @@
+配置文件
+MethodSecurityConfig
+OAuth2ServerConfig
+SecurityConfiguration
+
+MyWebUserApprovalHandler
+
+如需要访问其它页面不经过oauth2认证，则需要配置
+SecurityConfiguration 的 configure(WebSecurity web)方法
+
+curl my-client-with-registered-redirect@localhost:8080/newweb/oauth/token -d grant_type=client_credentials

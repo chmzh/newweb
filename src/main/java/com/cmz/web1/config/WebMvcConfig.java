@@ -233,12 +233,12 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	public ContentNegotiatingViewResolver contentViewResolver(ServletContext context) throws Exception {
 		ContentNegotiationManagerFactoryBean contentNegotiationManager = new ContentNegotiationManagerFactoryBean();
 		contentNegotiationManager.addMediaType("json", MediaType.APPLICATION_JSON);
-/*
+
 		 InternalResourceViewResolver viewResolver = new
 		 InternalResourceViewResolver();
 		 viewResolver.setPrefix("/WEB-INF/jsp/");
 		 viewResolver.setSuffix(".jsp");
-		 */
+		 
 		UrlBasedViewResolver freeMarkerViewResolver = new UrlBasedViewResolver();
 		// urlBasedViewResolver.setPrefix("/WEB-INF/views/");
 		freeMarkerViewResolver.setSuffix(".html");
@@ -278,7 +278,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 		ContentNegotiatingViewResolver contentViewResolver = new ContentNegotiatingViewResolver();
 		contentViewResolver.setContentNegotiationManager(contentNegotiationManager.getObject());
-		contentViewResolver.setViewResolvers(Arrays.<ViewResolver> asList(thymeleafResolver));
+		contentViewResolver.setViewResolvers(Arrays.<ViewResolver> asList(viewResolver));
 		contentViewResolver.setDefaultViews(Arrays.<View> asList(defaultView));
 		return contentViewResolver;
 	}
