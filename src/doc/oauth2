@@ -10,7 +10,9 @@ SecurityConfiguration 的 configure(WebSecurity web)方法
 
 curl my-client-with-registered-redirect@localhost:8080/newweb/oauth/token -d grant_type=client_credentials
 
-用户登陆
+用户登陆 获取token
 curl my-trusted-client@localhost:8080/newweb/oauth/token -d grant_type=password -d username=marissa -d password=koala
 
 curl http://localhost:8082/newweb/oauth/token?grant_type=password&client_id=my-trusted-client&username=marissa&password=koala
+
+获取token 登陆java客户端见OAuth2Client
