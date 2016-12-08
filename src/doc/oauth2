@@ -12,3 +12,5 @@ curl my-client-with-registered-redirect@localhost:8080/newweb/oauth/token -d gra
 
 用户登陆
 curl my-trusted-client@localhost:8080/newweb/oauth/token -d grant_type=password -d username=marissa -d password=koala
+
+curl http://localhost:8082/newweb/oauth/token?grant_type=password&client_id=my-trusted-client&username=marissa&password=koala
