@@ -16,3 +16,7 @@ curl my-trusted-client@localhost:8080/newweb/oauth/token -d grant_type=password 
 curl http://localhost:8082/newweb/oauth/token?grant_type=password&client_id=my-trusted-client&username=marissa&password=koala
 
 获取token 登陆java客户端见OAuth2Client
+
+
+JDBC
+http://elim.iteye.com/blog/2157769
