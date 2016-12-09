@@ -46,7 +46,7 @@ public class ImpalaManager {
 	private int impalaMinIdle;
 	@Value("${impala.heart}")
 	private String impalaHeart;
-
+/*
 	@Bean
 	public DataSource impalaDataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
@@ -71,4 +71,5 @@ public class ImpalaManager {
 		client.setDataSource(impalaDataSource());
 		return client;
 	}
+	*/
 }

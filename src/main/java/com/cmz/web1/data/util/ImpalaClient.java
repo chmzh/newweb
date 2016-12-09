@@ -8,16 +8,16 @@ import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class ImpalaClient {
-	private JdbcTemplate jdbcTemplate;
-	public ImpalaClient(){
-		
-	}
-	
-	public void setDataSource(DataSource dataSource){
-		jdbcTemplate = new JdbcTemplate(dataSource);
-	}
-	
-	public List<Map<String, Object>> queryForList(String sql,Object...params){
-		return jdbcTemplate.queryForList(sql,params);
-	}
+//	private JdbcTemplate jdbcTemplate;
+//	public ImpalaClient(){
+//		
+//	}
+//	
+//	public void setDataSource(DataSource dataSource){
+//		jdbcTemplate = new JdbcTemplate(dataSource);
+//	}
+//	
+//	public List<Map<String, Object>> queryForList(String sql,Object...params){
+//		return jdbcTemplate.queryForList(sql,params);
+//	}
 }

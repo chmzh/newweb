@@ -66,6 +66,7 @@ public class MySQLManager {
 		return new DataSourceTransactionManager(mysqlDataSource());
 	}
 
+	
 	@Bean
 	public SqlSessionFactoryBean sqlSessionFactoryBean() {
 		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
@@ -73,7 +74,7 @@ public class MySQLManager {
 		return sqlSessionFactoryBean;
 	}
 //	@Bean
-//	MapperScannerConfigurer mapperScannerConfigurer(){
+//	public MapperScannerConfigurer mapperScannerConfigurer(){
 //		MapperScannerConfigurer configurer = new MapperScannerConfigurer();
 //		configurer.setSqlSessionFactoryBeanName("sqlSessionFactoryBean");
 //		configurer.setBasePackage("com.cmz.web1.dao");

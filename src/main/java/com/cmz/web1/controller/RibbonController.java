@@ -1,6 +1,8 @@
 package com.cmz.web1.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
@@ -12,7 +14,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.cmz.web1.ribbon.SayHelloConfiguration;
 
-@SpringBootApplication
+
 @RestController
 @RequestMapping("ribbon")
 @RibbonClient(name = "say-hello", configuration = SayHelloConfiguration.class)
@@ -32,5 +34,8 @@ public class RibbonController {
     String greeting = this.restTemplate.getForObject("http://say-hello/greeting", String.class);
     return String.format("%s, %s!", greeting, name);
   }
+//  public static void main(String[] args) {
+//	    SpringApplication.run(RibbonController.class, args);
+//	  }
 }
 
