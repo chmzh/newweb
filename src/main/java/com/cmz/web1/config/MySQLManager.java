@@ -5,6 +5,8 @@ import javax.sql.DataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
+import org.mybatis.spring.mapper.MapperScannerConfigurer;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -44,7 +46,7 @@ public class MySQLManager {
 	@Value("${jdbc.driver}")
 	private String driver;
 
-	@Bean("mysql")
+	@Bean
 	public DataSource mysqlDataSource() {
 		try {
 			DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -70,4 +72,11 @@ public class MySQLManager {
 		sqlSessionFactoryBean.setDataSource(mysqlDataSource());
 		return sqlSessionFactoryBean;
 	}
+//	@Bean
+//	MapperScannerConfigurer mapperScannerConfigurer(){
+//		MapperScannerConfigurer configurer = new MapperScannerConfigurer();
+//		configurer.setSqlSessionFactoryBeanName("sqlSessionFactoryBean");
+//		configurer.setBasePackage("com.cmz.web1.dao");
+//		return configurer;
+//	}
 }

@@ -20,9 +20,9 @@ import com.cmz.web1.crypto.MyPasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-	@Autowired
-	@Qualifier("mysql")
-	private DataSource dataSource;
+//	@Autowired
+//	@Qualifier("mysql")
+//	private DataSource dataSource;
 	/**
 	 * 参考 http://elim.iteye.com/blog/2157769
 	 * @param auth
@@ -30,19 +30,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	 */
     @Autowired
     public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication().withUser("marissa").password("koala").roles("USER").and().withUser("paul")
-//                .password("emu").roles("USER");
-        auth.jdbcAuthentication()
-        .dataSource(dataSource)
-        .usersByUsernameQuery("select uname as username,pwd as password,enabled from user where uname = ?")
-        .authoritiesByUsernameQuery("select uname as username, 'USER' as authority from user where uname = ?")
-        .passwordEncoder(new MyPasswordEncoder());
+        auth.inMemoryAuthentication().withUser("marissa").password("koala").roles("USER").and().withUser("paul")
+                .password("emu").roles("USER");
+//        auth.jdbcAuthentication()
+//        .dataSource(dataSource)
+//        .usersByUsernameQuery("select uname as username,pwd as password,enabled from user where uname = ?")
+//        .authoritiesByUsernameQuery("select uname as username, 'USER' as authority from user where uname = ?")
+//        .passwordEncoder(new MyPasswordEncoder());
         
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/webjars/**", "/assets/**", "/oauth/uncache_approvals", "/oauth/cache_approvals");
+        web.ignoring().antMatchers("/**","/webjars/**", "/assets/**", "/oauth/uncache_approvals", "/oauth/cache_approvals");
     }
 
     @Override
