@@ -135,11 +135,10 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	 * @return
 	 */
 	@Bean
-	public RequestMappingHandlerAdapter requestMappingHandlerAdapter(
-			StringHttpMessageConverter stringHttpMessageConverter) {
+	public RequestMappingHandlerAdapter requestMappingHandlerAdapter() {
 		RequestMappingHandlerAdapter adapter = new RequestMappingHandlerAdapter();
 		List<HttpMessageConverter<?>> converters = new ArrayList<HttpMessageConverter<?>>();
-		converters.add(stringHttpMessageConverter);
+		converters.add(stringHttpMessageConverter());
 		converters.add(mappingJackson2HttpMessageConverter());
 		adapter.setMessageConverters(converters);
 		return adapter;
@@ -278,7 +277,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 		ContentNegotiatingViewResolver contentViewResolver = new ContentNegotiatingViewResolver();
 		contentViewResolver.setContentNegotiationManager(contentNegotiationManager.getObject());
-		contentViewResolver.setViewResolvers(Arrays.<ViewResolver> asList(viewResolver));
+		contentViewResolver.setViewResolvers(Arrays.<ViewResolver> asList(thymeleafResolver));
 		contentViewResolver.setDefaultViews(Arrays.<View> asList(defaultView));
 		return contentViewResolver;
 	}
