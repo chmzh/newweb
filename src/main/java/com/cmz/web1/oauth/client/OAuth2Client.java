@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordResourceDetails;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
+import org.springframework.web.client.RestTemplate;
 
 public class OAuth2Client {
 	public static void main(String[] args) {
@@ -24,5 +25,8 @@ public class OAuth2Client {
 		OAuth2RestTemplate template = new OAuth2RestTemplate(resource);
 		OAuth2AccessToken token = template.getAccessToken();
 		System.out.println(token);
+		
+		
+		
 	}
 }

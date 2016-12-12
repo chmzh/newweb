@@ -33,7 +33,8 @@ public class UserController {
 //	@Autowired
 //	private ImpalaClient impalaClient;
 	
-	@RequestMapping(value="hello1",produces="text/plain;charset=UTF-8")
+	//@RequestMapping(value="hello1",produces="text/plain;charset=UTF-8")
+	@RequestMapping(value="hello1")
 	@ResponseBody
 	public String showBody(){
 		//List<Map<String, Object>> lists = impalaClient.queryForList("select * from log_test1.zh_consumeinfo where pdate='2016-11-14'");

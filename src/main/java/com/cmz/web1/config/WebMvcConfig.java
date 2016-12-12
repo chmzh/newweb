@@ -36,6 +36,7 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.accept.ContentNegotiationManagerFactoryBean;
 import org.springframework.web.bind.support.ConfigurableWebBindingInitializer;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.method.support.HandlerMethodReturnValueHandlerComposite;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
@@ -44,8 +45,11 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
+import org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitterAdapter;
 import org.springframework.web.servlet.mvc.method.annotation.ServletWebArgumentResolverAdapter;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -129,11 +133,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		return converter;
 	}
 
-	/**
-	 * @ResponseBody 编码问题
-	 * @param stringHttpMessageConverter
-	 * @return
-	 */
+	
 	@Bean
 	public RequestMappingHandlerAdapter requestMappingHandlerAdapter() {
 		RequestMappingHandlerAdapter adapter = new RequestMappingHandlerAdapter();
@@ -143,19 +143,40 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		adapter.setMessageConverters(converters);
 		return adapter;
 	}
-
+	/**
+	 * @ResponseBody 编码问题
+	 * @param stringHttpMessageConverter
+	 * @return
+	 */
+	@Bean
+	public RequestResponseBodyMethodProcessor requestResponseBodyMethodProcessor(){
+		List<HttpMessageConverter<?>> converters = new ArrayList<HttpMessageConverter<?>>();
+		converters.add(stringHttpMessageConverter());
+		converters.add(mappingJackson2HttpMessageConverter());
+		RequestResponseBodyMethodProcessor processor = new RequestResponseBodyMethodProcessor(converters);
+		return processor;
+	}
+	/*
+	@Bean
+	public HandlerMethodReturnValueHandlerComposite handlerMethodReturnValueHandlerComposite(){
+		HandlerMethodReturnValueHandlerComposite handlerComposite = new HandlerMethodReturnValueHandlerComposite();
+		//handlerComposite.addHandler(requestMappingHandlerAdapter());
+		return handlerComposite;
+	}
+	*/
 	@Bean
 	public StringHttpMessageConverter stringHttpMessageConverter() {
-		StringHttpMessageConverter converter = new StringHttpMessageConverter(Charset.forName("UTF-8"));
+		StringHttpMessageConverter converter = new StringHttpMessageConverter();
+		converter.setDefaultCharset(Charset.forName("UTF-8"));
 		List<MediaType> supportedMediaTypes = new ArrayList<MediaType>();
 		supportedMediaTypes.add(MediaType.parseMediaType("text/plain;charset=UTF-8"));
 		supportedMediaTypes.add(MediaType.parseMediaType("text/html;charset=UTF-8"));
 		supportedMediaTypes.add(MediaType.parseMediaType("applicaiton/javascript;charset=UTF-8"));
 		converter.setSupportedMediaTypes(supportedMediaTypes);
-
 		return converter;
 	}
 
+	
 //	@Bean
 //	public RequestMappingHandlerMapping requestMappingHandlerMapping(HandlerInterceptor handlerInterceptor) {
 //		RequestMappingHandlerMapping mapping = new RequestMappingHandlerMapping();
