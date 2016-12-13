@@ -50,6 +50,7 @@ public class RibbonClient {
         System.out.println("Status for URI:" + response.getRequestedURI() + " is :" + response.getStatus());
         
         ZoneAwareLoadBalancer lb = (ZoneAwareLoadBalancer) client.getLoadBalancer();
+
         System.out.println(lb.getLoadBalancerStats());
         /*
         for(int i = 0; i < 20; i ++) {  
