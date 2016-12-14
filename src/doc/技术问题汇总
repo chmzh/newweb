@@ -1,2 +1,4 @@
 Spring获取Web应用根目录的方法 
 http://blog.csdn.net/hellostory/article/details/6106930
+
+java -Xms3500m -Xmx3500m -Xmn2500m -XX:+PrintGCDetails -Xloggc:heap.log -jar cndw_inflow_thrift.jar &
