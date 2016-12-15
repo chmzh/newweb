@@ -29,5 +29,15 @@ hello 页面中文测试<br>
 <button type="button" class="btn btn-danger">危险按钮</button>
 <!-- 并不强调是一个按钮，看起来像一个链接，但同时保持按钮的行为 -->
 <button type="button" class="btn btn-link">链接按钮</button>
+
+    <script th:inline="javascript" type="text/javascript">  
+    /*<![CDATA[*/  
+      
+        var message = [[${content}]];  
+        alert(message);  
+      
+    /*]]>*/  
+    </script>  
+
 </body>
 </html>
