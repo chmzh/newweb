@@ -73,6 +73,8 @@
           };
 		  $scope.loadMoreData = function(){
 		  	console.log('load');
+		  	var nitems = {"name":"java"};
+		  	$scope.items.push(nitems);
 			$scope.$broadcast('scroll.infiniteScrollComplete');
 		  };
 		  /*
@@ -94,7 +96,7 @@
 				<ion-infinite-scroll
 				  icon="ion-loading-d"
 				  on-infinite="loadMoreData()"
-				  distance="5%">
+				  distance="10%">
 				</ion-infinite-scroll>
 
             </ion-content>
