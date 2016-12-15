@@ -17,4 +17,10 @@ public class IonicController {
 		model.addAttribute("content", "你好");
 		return "ionic_form";
 	}
+	
+	@RequestMapping("refresher")
+	public String refresher(Model model){
+		//model.addAttribute("content", "你好");
+		return "ionic_refresher";
+	}
 }
