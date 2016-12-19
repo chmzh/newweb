@@ -72,10 +72,13 @@
                   });
           };
 		  $scope.loadMoreData = function(){
-		  	console.log('load');
-		  	var nitems = {"name":"java"};
-		  	$scope.items.push(nitems);
-			$scope.$broadcast('scroll.infiniteScrollComplete');
+			  setTimeout(function(){
+				  console.log('load');
+				  	var nitems = {"name":"java"};
+				  	$scope.items.push(nitems);
+					$scope.$broadcast('scroll.infiniteScrollComplete');
+				  },2000);
+		  	
 		  };
 		  /*
 		  $scope.$on('stateChangeSuccess', function() {
@@ -97,6 +100,10 @@
 				  icon="ion-loading-d"
 				  on-infinite="loadMoreData()"
 				  distance="10%">
+					<ion-infinite-scroll-content
+				      loadingSpinner="bubbles"
+				      loadingText="Loading more data...">
+				    </ion-infinite-scroll-content>
 				</ion-infinite-scroll>
 
             </ion-content>
