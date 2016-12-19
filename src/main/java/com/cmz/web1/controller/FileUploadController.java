@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.cmz.web1.constant.URLConfig;
 import com.cmz.web1.context.ContextUtil;
 
 @Controller
@@ -35,15 +36,18 @@ public class FileUploadController {
 	@ResponseBody
     public String handleFileUpload(HttpServletRequest request, @RequestParam("upload") MultipartFile file,
                                    RedirectAttributes redirectAttributes) {
-		String dir = "";
+		
+		String dir = "/uploadfiles/";
+		String relativeUrl = URLConfig.HOME+dir;
 		try {
-			dir = ContextUtil.getPath("/uploadfiles/");
+			dir = ContextUtil.getPath(dir);
 			logger.info(dir);
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		Path path = Paths.get(dir+file.getOriginalFilename());
+		String fileName = file.getOriginalFilename();  //这里需要重命名
+		Path path = Paths.get(dir+fileName);
 		try {
 			Files.write(path, file.getBytes());
 		} catch (IOException e) {
@@ -59,7 +63,7 @@ public class FileUploadController {
 //        out.println("window.parent.CKEDITOR.tools.callFunction("
 //                + callback + ",'" + path.toString() + "',''" + ")");
 //        out.println("</script>");
-        String url = "<script type=\"text/javascript\">window.parent.CKEDITOR.tools.callFunction("+ callback + ",'" + path.toString() + "',''" + ")</script>";
+        String url = "<script type=\"text/javascript\">window.parent.CKEDITOR.tools.callFunction("+ callback + ",'" + relativeUrl+fileName + "',''" + ")</script>";
         return url;
     }
 }
