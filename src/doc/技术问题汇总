@@ -3,5 +3,8 @@ http://blog.csdn.net/hellostory/article/details/6106930
 
 java -Xms3500m -Xmx3500m -Xmn2500m -XX:+PrintGCDetails -Xloggc:heap.log -jar cndw_inflow_thrift.jar &
 
+在线编辑器
 ckeditor
 http://docs.ckeditor.com/#!/guide/dev_installation
+kindeditor
+http://kindeditor.net/demo.php
