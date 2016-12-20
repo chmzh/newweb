@@ -86,7 +86,13 @@ public class DateTimeUtil {
 	
 	public static void main(String[] args) {
 		//System.out.println(curDateTime());
-		//System.out.println(toDateTime(getMillis("America/Dawson"),"America/Dawson"));
+		
+		//毫秒
+		long millis = getMillis("America/Dawson");
+		System.out.println(toDateTime(millis,"America/Dawson"));
+		
+		
+		//增加天数
 		String curDateTime = curDateTime("Asia/Shanghai");
 		System.out.println(curDateTime);
 		System.out.println(plusDays(curDateTime, 2));
