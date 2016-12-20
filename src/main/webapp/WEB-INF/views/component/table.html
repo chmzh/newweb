@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<base href="/newweb/"/> 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+	<link href="assets/bootstrap/common/css/bootstrap.min.css" rel="stylesheet">
+	<script src="assets/jquery/jquery.min.js"></script>
+ 	<link href="assets/bootstrap-table/css/bootstrap-table.css" rel="stylesheet" type="text/css">  
+	<link href="assets/bootstrap-table/css/bootstrap-table-fixed-columns.css" rel="stylesheet" type="text/css">
+</head>
+
+
+<body>
+
+	<div class="toolbar form-inline">
+            <span>Fixed Number: </span>
+            <input class="form-control" id="fixedNumber" type="number" value="1" min="1" max="5">
+        </div>
+        <table id="table" data-height="400" data-show-columns="true"></table>
+	<form role="form" action="statuser/reglogin90" method="get">
+
+		开始日期:<input size="16" type="text" value=""
+			name="startDate" readonly class="form_datetime"> 结束日期:<input
+			size="16" type="text" value="" name="endDate" readonly
+			class="form_datetime1">
+
+		<button type="submit" class="btn btn-primary">查询</button>
+	</form>
+	
+	<!-- jQuery -->
+	<script src="assets/jquery/jquery.min.js"></script>
+
+	<!-- Bootstrap Core JavaScript -->
+	<script
+		src="assets/bootstrap/dist/js/bootstrap.min.js"></script>
+
+	<script
+		src="assets/bootstrap-datepicker/js/bootstrap-datetimepicker.min.js"></script>
+	<script
+		src="assets/bootstrap-datepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+		
+		<script
+		src="assets/bootstrap-table/js/bootstrap-table.js"></script>
+		<script
+		src="assets/bootstrap-table/js/bootstrap-table-fixed-columns.js"></script>
+		
+	<script type="text/javascript">
+		$('.form_datetime').datetimepicker({minView: "month",language: 'zh-CN',format: 'yyyy-mm-dd'});
+		$('.form_datetime1').datetimepicker({minView: "month",language: 'zh-CN',format: 'yyyy-mm-dd'});
+	</script>
+	
+	<script type="text/javascript">
+	
+	var $table = $('#table');
+
+    $(function () {
+        buildTable($table, 30, 20);
+
+        $('#fixedNumber').change(function () {
+            buildTable($table, 30, 20);
+        });
+    });
+
+    function buildTable($el, cells, rows) {
+        var i, j, row,
+                columns = [],
+                data = [];
+
+        for (i = 0; i < cells; i++) {
+            columns.push({
+                field: 'field' + i,
+                title: 'Cell' + i,
+                sortable: true
+            });
+        }
+        for (i = 0; i < rows; i++) {
+            row = {};
+            for (j = 0; j < cells; j++) {
+                row['field' + j] = 'Row-' + i + '-' + j;
+            }
+            data.push(row);
+        }
+        $el.bootstrapTable('destroy').bootstrapTable({
+            columns: columns,
+            data: data,
+            search: true,
+            toolbar: '.toolbar',
+            fixedColumns: true,
+            fixedNumber: +$('#fixedNumber').val()
+        });
+    }
+</script>
+	
+</body>
+
+</html>
