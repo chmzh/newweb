@@ -14,7 +14,7 @@ import org.joda.time.format.DateTimeFormatter;
 public class DateTimeUtil {
 	public final static String pattern = "yyyy-MM-dd HH:mm:ss";
 	/**
-	 * 当前时间 yyyy-MM-dd hh:mm:ss
+	 * 当前时间 yyyy-MM-dd HH:mm:ss
 	 * @param timezone
 	 * @return
 	 */
