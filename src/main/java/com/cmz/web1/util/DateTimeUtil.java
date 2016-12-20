@@ -1,5 +1,7 @@
 package com.cmz.web1.util;
 
+import javax.swing.text.html.parser.DTD;
+
 import org.joda.time.Chronology;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -62,6 +64,18 @@ public class DateTimeUtil {
 		DateTime dt = new DateTime(gregorianJuian);
 		return (int) (dt.getMillis()/1000);
 	}
+	/**
+	 * 增加相应的天数
+	 * @param someday
+	 * @param days
+	 * @return
+	 */
+	public static String plusDays(String someday,int days){
+		DateTimeFormatter formatter = DateTimeFormat.forPattern(pattern);
+		DateTime dt = DateTime.parse(someday, formatter);
+		dt = dt.plusDays(days);
+		return dt.toString(formatter);
+	}
 	
 	/**
 	 * 默认返回 Asia/Shanghai 时区时间
@@ -74,6 +88,9 @@ public class DateTimeUtil {
 	
 	public static void main(String[] args) {
 		//System.out.println(curDateTime());
-		System.out.println(toDateTime(getMillis("America/Dawson"),"America/Dawson"));
+		//System.out.println(toDateTime(getMillis("America/Dawson"),"America/Dawson"));
+		String curDateTime = curDateTime("America/Dawson");
+		System.out.println(curDateTime);
+		System.out.println(plusDays(curDateTime, 2));
 	}
 }
