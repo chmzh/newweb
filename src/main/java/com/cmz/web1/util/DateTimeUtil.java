@@ -1,7 +1,5 @@
 package com.cmz.web1.util;
 
-import javax.swing.text.html.parser.DTD;
-
 import org.joda.time.Chronology;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -14,7 +12,7 @@ import org.joda.time.format.DateTimeFormatter;
  *
  */
 public class DateTimeUtil {
-	public final static String pattern = "yyyy-MM-dd hh:mm:ss";
+	public final static String pattern = "yyyy-MM-dd HH:mm:ss";
 	/**
 	 * 当前时间 yyyy-MM-dd hh:mm:ss
 	 * @param timezone
@@ -89,7 +87,7 @@ public class DateTimeUtil {
 	public static void main(String[] args) {
 		//System.out.println(curDateTime());
 		//System.out.println(toDateTime(getMillis("America/Dawson"),"America/Dawson"));
-		String curDateTime = curDateTime("America/Dawson");
+		String curDateTime = curDateTime("Asia/Shanghai");
 		System.out.println(curDateTime);
 		System.out.println(plusDays(curDateTime, 2));
 	}
