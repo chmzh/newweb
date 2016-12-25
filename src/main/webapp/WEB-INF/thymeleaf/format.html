@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <body>
+    <p th:text="${person.age}">
+    <p th:text="${person.date}">
+    <p th:text="${person.name}">
+    
+    
+    date:<br/>
+    <spring:eval expression="person.date"></spring:eval><br/>
+    </body>
+</html>
