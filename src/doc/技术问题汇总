@@ -22,3 +22,10 @@ http://blog.csdn.net/jingshuaizh/article/details/42646063
 用Spring发送和接受JMS消息的一个小例子
 http://www.open-open.com/lib/view/open1416379570867.html
 https://my.oschina.net/xiaoxishan/blog/381209
+
+下载activemq 
+http://activemq.apache.org/activemq-591-release.html
+并启动 /bin/activemq start
+
+运行 jms-server 
+动行 jms-client
