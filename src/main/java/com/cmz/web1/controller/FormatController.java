@@ -18,7 +18,7 @@ public class FormatController {
 	public String index(Model model){
 		PersonForm personForm = new PersonForm();
 		personForm.setAge(1);
-		//personForm.setDate(new Date());
+		personForm.setDate(new Date());
 		personForm.setName("name");
 		model.addAttribute("person",personForm);
 		return "format";
@@ -31,7 +31,7 @@ public class FormatController {
 		PersonForm user = new PersonForm();
 		user.setAge(1);;
 		user.setName("你好");
-		//user.setDate(new Date());
+		user.setDate(new Date());
 		return user;
 }
 }
