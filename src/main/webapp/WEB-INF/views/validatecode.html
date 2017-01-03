@@ -12,12 +12,12 @@
 </head>
 <body>
  <input class="form-control" placeholder="验证码" name="code" id="code" type="text" value="" ><span id="code_clew"></span>
- <img style="cursor:pointer;" id="vd_image" onClick="refresh_vdcode();" title="点击图片更新验证码" src="/valiCode"><br/>
+ <img style="cursor:pointer;" id="vd_image" onClick="refresh_vdcode();" title="点击图片更新验证码" src="valiCode"><br/>
 </body>
 <script type="text/javascript">
 	function refresh_vdcode() {
 		$('#vd_image').attr('src',
-				'/valiCode?time=' + Math.round(Math.random() * 10));
+				'valiCode?time=' + Math.round(Math.random() * 10));
 	}
 	</script>
 </html>
