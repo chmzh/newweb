@@ -25,7 +25,11 @@ https://my.oschina.net/xiaoxishan/blog/381209
 
 下载activemq 
 http://activemq.apache.org/activemq-591-release.html
+http://activemq.apache.org/using-activemq-5.html
+Web admin
+http://localhost:8161/admin/index.jsp
+帐号：admin 密码：admin
 并启动 /bin/activemq start
-
+JmsController
 运行 jms-server 
 动行 jms-client
