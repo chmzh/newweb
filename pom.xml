@@ -319,8 +319,18 @@
     <artifactId>joda-time</artifactId>
     <version>2.9.7</version>
 </dependency>
-
-
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-jms -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-jms</artifactId>
+    <version>4.1.4.RELEASE</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.apache.activemq/activemq-core -->
+<dependency>
+    <groupId>org.apache.activemq</groupId>
+    <artifactId>activemq-all</artifactId>
+    <version>5.11.0</version>
+</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
