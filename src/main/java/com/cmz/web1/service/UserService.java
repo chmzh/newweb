@@ -28,7 +28,8 @@ public class UserService {
 		int r = userDao.update("abcaa", 9);
 		int c = userDao.count("user");
 	}
-	@Cacheable("guava")
+	@Cacheable("test")
+	//@Cacheable("guava")
 	//@Cacheable("default")
 	public User getUser(){
 		return userDao.getUser();
