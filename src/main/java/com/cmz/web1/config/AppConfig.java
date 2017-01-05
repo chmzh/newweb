@@ -50,6 +50,7 @@ public class AppConfig implements CachingConfigurer {
 	}
 	
 	@Bean("guava") 
+	//@Primary
     public SimpleCacheManager guavaCacheManager() {  
         SimpleCacheManager cacheManager = new SimpleCacheManager();  
   
