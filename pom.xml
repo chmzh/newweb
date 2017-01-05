@@ -337,6 +337,29 @@
     <artifactId>cache-api</artifactId>
     <version>1.0.0</version>
 </dependency>
+<!-- https://mvnrepository.com/artifact/com.google.code.simple-spring-memcached/simple-spring-memcached -->
+<dependency>
+    <groupId>com.google.code.simple-spring-memcached</groupId>
+    <artifactId>simple-spring-memcached</artifactId>
+    <version>3.6.1</version>
+</dependency>
+<dependency>  
+            <groupId>com.google.code.simple-spring-memcached</groupId>  
+            <artifactId>xmemcached-provider</artifactId>  
+            <version>3.6.1</version>  
+        </dependency>  
+<!-- https://mvnrepository.com/artifact/com.googlecode.xmemcached/xmemcached -->
+<dependency>
+    <groupId>com.googlecode.xmemcached</groupId>
+    <artifactId>xmemcached</artifactId>
+    <version>2.0.1</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/com.google.code.simple-spring-memcached/jmemcached-core -->
+<!-- <dependency>
+    <groupId>com.google.code.simple-spring-memcached</groupId>
+    <artifactId>jmemcached-core</artifactId>
+    <version>1.0.2</version>
+</dependency> -->
 
 		<dependency>
 			<groupId>junit</groupId>

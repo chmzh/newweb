@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.aspectj.weaver.tools.cache.SimpleCache;
 import org.springframework.cache.Cache;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.concurrent.ConcurrentMapCache;
@@ -14,6 +15,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.Primary;
 
+import com.cmz.web1.cache.MemcachedCache;
+import com.google.code.ssm.CacheFactory;
+import com.google.code.ssm.config.DefaultAddressProvider;
+import com.google.code.ssm.providers.CacheConfiguration;
+import com.google.code.ssm.providers.xmemcached.MemcacheClientFactoryImpl;
 import com.google.common.cache.CacheBuilder;
 
 @Configuration
@@ -63,4 +69,28 @@ public class AppConfig {
         return cacheManager;  
     }  
     */
+	//=====================memcache
+	@Bean
+	public SimpleCacheManager memcacheManager(){
+		SimpleCacheManager cacheManager = new SimpleCacheManager();
+		List<Cache> caches = new ArrayList<>();
+		MemcachedCache cache = new MemcachedCache();
+		cache.setCache(cacheFactory().getCache());
+		caches.add(cache);
+		cacheManager.setCaches(caches);
+		return cacheManager;
+	}
+	@Bean
+	public CacheFactory cacheFactory(){
+		CacheFactory cacheFactory = new CacheFactory();
+		cacheFactory.setCacheClientFactory(new MemcacheClientFactoryImpl());
+		DefaultAddressProvider addressProvider = new DefaultAddressProvider();
+		addressProvider.setAddress("127.0.0.1:11211");
+		cacheFactory.setAddressProvider(addressProvider);
+		CacheConfiguration configuration = new CacheConfiguration();
+		configuration.setConsistentHashing(true);
+		cacheFactory.setConfiguration(configuration);
+		cacheFactory.setCacheName("default");
+		return cacheFactory;
+	}
 }
