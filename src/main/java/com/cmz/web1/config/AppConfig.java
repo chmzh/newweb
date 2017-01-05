@@ -70,6 +70,7 @@ public class AppConfig {
     }  
     */
 	//=====================memcache
+	/*
 	@Bean
 	public SimpleCacheManager memcacheManager(){
 		SimpleCacheManager cacheManager = new SimpleCacheManager();
@@ -93,4 +94,5 @@ public class AppConfig {
 		cacheFactory.setCacheName("default");
 		return cacheFactory;
 	}
+	*/
 }
