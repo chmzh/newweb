@@ -331,6 +331,13 @@
     <artifactId>activemq-all</artifactId>
     <version>5.11.0</version>
 </dependency>
+<!-- https://mvnrepository.com/artifact/javax.cache/cache-api -->
+<dependency>
+    <groupId>javax.cache</groupId>
+    <artifactId>cache-api</artifactId>
+    <version>1.0.0</version>
+</dependency>
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

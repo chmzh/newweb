@@ -33,3 +33,6 @@ http://localhost:8161/admin/index.jsp
 JmsController
 运行 jms-server 
 动行 jms-client
+
+Spring 缓存 cache 集成
+http://www.tuicool.com/articles/vEV7Bz

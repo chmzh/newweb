@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cmz.web1.data.util.ImpalaClient;
+import com.cmz.web1.domain.User;
 import com.cmz.web1.service.UserService;
 
 @Controller
@@ -40,6 +41,14 @@ public class UserController {
 		//List<Map<String, Object>> lists = impalaClient.queryForList("select * from log_test1.zh_consumeinfo where pdate='2016-11-14'");
 		//System.out.println(lists);
 		return "你好";
+	}
+	
+	@RequestMapping("getUser")
+	@ResponseBody
+	public String getUser(Model model){
+		User user = userService.getUser();
+		model.addAttribute("content", user.getName());
+		return "hello";
 	}
 	
 	@RequestMapping("hello")
