@@ -2,12 +2,15 @@
 <%
 	String path = request.getContextPath();
 	String basePath = request.getServerName() + ":" + request.getServerPort() + path + "/";
+	String basePath2 = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
 <title>WebSocket示例</title>
-<script type="text/javascript" src="resources/jquery.js"></script>
+<script type="text/javascript" src="<%=basePath2%>assets/jquery/jquery.min.js"></script>
 </head>
 <body>
 	<form action="login" method="post">
