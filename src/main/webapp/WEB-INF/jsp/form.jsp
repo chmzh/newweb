@@ -19,6 +19,6 @@
                     <td><button type="submit">Submit</button></td>
                 </tr>
             </table>
-        </form>
+        </form:form>
     </body>
 </html>
