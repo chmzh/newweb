@@ -11,6 +11,7 @@
 el 表达式不起作用 在页面添加
 <%@ page isELIgnored="false" %>
 因为默认情况下 EL表达式是被忽略的
+http://blog.csdn.net/figo645/article/details/48385027
 
 Jsp中获取Session：
 
