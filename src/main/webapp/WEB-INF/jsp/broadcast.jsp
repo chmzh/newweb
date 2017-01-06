@@ -15,7 +15,7 @@
 	var path='<%=basePath%>';
 	function broadcast(){
 		$.ajax({
-			url:path+'websocket/broadcast',
+			url:path+'broadcast',
 			type:"post",
 			data:{text:$("#msg").val()},
 			dataType:"json",

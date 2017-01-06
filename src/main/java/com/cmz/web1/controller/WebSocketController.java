@@ -46,8 +46,8 @@ public class WebSocketController {
 
 	}
 	@RequestMapping("index")
-	public String Index(){
-		return "index";
+	public ModelAndView Index(){
+		return new ModelAndView("index");
 	}
 	
 	// 用户登录

@@ -10,7 +10,7 @@
 <script type="text/javascript" src="resources/jquery.js"></script>
 </head>
 <body>
-	<form action="websocket/login" method="post">
+	<form action="login" method="post">
 		用户名:
 		<select name="id">
 			<option value="1">张三</option>

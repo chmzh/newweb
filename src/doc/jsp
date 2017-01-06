@@ -1,0 +1,18 @@
+ jsp页面中获取session中的值 
+ 
+ JSTL标签获取Session： 需要添加 spring-expression 包
+
+    session.setAttribute（"age"，"123"）;  
+    ${ sessionScope.age}  在页面上显示的就是123了  
+      
+    sessionScope指的是session的范围，类似还有requestScope，pageScope,contextScope  
+    然后后面的age表示的是set属性时的key值  
+
+
+Jsp中获取Session：
+
+    session是jsp的内置对象，所以你可以直接写在jsp的  
+    <%  
+    session.setAttribute("a",  b);  //把b放到session里，命名为a，  
+    String M = session.getAttribute(“a”).toString(); //从session里把a拿出来，并赋值给M  
+    %>  
