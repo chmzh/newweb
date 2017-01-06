@@ -8,6 +8,9 @@
     sessionScope指的是session的范围，类似还有requestScope，pageScope,contextScope  
     然后后面的age表示的是set属性时的key值  
 
+el 表达式不起作用 在页面添加
+<%@ page isELIgnored="false" %>
+因为默认情况下 EL表达式是被忽略的
 
 Jsp中获取Session：
 

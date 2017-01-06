@@ -1,3 +1,4 @@
+<%@ page isELIgnored="false" %>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
@@ -224,7 +225,7 @@ input[type=button] {
 		</script>
 </head>
 <body>
-	欢迎：${sessionScope.name }
+	欢迎：${sessionScope.name}
 	<div id="content"></div>
 	<input type="text" placeholder="请输入要发送的信息" id="msg" class="msg" onkeydown="send(event)">
 	<input type="button" value="发送" class="send" onclick="sendMsg()" >
