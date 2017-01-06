@@ -1,19 +1,15 @@
 package com.cmz.web1.config;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.aspectj.weaver.tools.cache.SimpleCache;
 import org.springframework.cache.Cache;
 import org.springframework.cache.annotation.CachingConfigurer;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.concurrent.ConcurrentMapCache;
 import org.springframework.cache.guava.GuavaCache;
 import org.springframework.cache.interceptor.CacheErrorHandler;
-import org.springframework.cache.interceptor.CacheOperationInvocationContext;
 import org.springframework.cache.interceptor.CacheResolver;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.cache.interceptor.SimpleKeyGenerator;
@@ -21,14 +17,8 @@ import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
-import org.springframework.context.annotation.Primary;
 
-import com.cmz.web1.cache.MemcachedCache;
 import com.cmz.web1.cache.MyCacheResolver;
-import com.google.code.ssm.CacheFactory;
-import com.google.code.ssm.config.DefaultAddressProvider;
-import com.google.code.ssm.providers.CacheConfiguration;
-import com.google.code.ssm.providers.xmemcached.MemcacheClientFactoryImpl;
 import com.google.common.cache.CacheBuilder;
 
 @Configuration
@@ -149,4 +139,16 @@ public class AppConfig implements CachingConfigurer {
 		return cacheFactory;
 	}
 	*/
+	
+	
+	//国际化 基于浏览器的国际化
+//	@Bean
+//	public ResourceBundleMessageSource messageSource(){
+//		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+//		//位置在 src/main/resources下面
+//		messageSource.setBasename("/WEB-INF/lang/messages");
+//		messageSource.setUseCodeAsDefaultMessage(true);
+//		return messageSource;
+//	}  
+   
 }
