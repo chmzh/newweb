@@ -298,7 +298,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 		ContentNegotiatingViewResolver contentViewResolver = new ContentNegotiatingViewResolver();
 		contentViewResolver.setContentNegotiationManager(contentNegotiationManager.getObject());
-		contentViewResolver.setViewResolvers(Arrays.<ViewResolver> asList(viewResolver));
+		contentViewResolver.setViewResolvers(Arrays.<ViewResolver> asList(thymeleafResolver));
 		contentViewResolver.setDefaultViews(Arrays.<View> asList(defaultView));
 		return contentViewResolver;
 	}

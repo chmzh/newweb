@@ -81,7 +81,7 @@
 	</bean>
 
 	<!-- 定义mongo对象，对应的是mongodb官方jar包中的Mongo，replica-set设置集群副本的ip地址和端口 -->
-	<mongo:mongo id="mongo" replica-set="${mongo.hostport}">
+<!-- 	<mongo:mongo id="mongo" replica-set="${mongo.hostport}">
 		<mongo:options connections-per-host="${mongo.connectionsPerHost}"
 			threads-allowed-to-block-for-connection-multiplier="${mongo.threadsAllowedToBlockForConnectionMultiplier}"
 			connect-timeout="${mongo.connectTimeout}" max-wait-time="${mongo.maxWaitTime}"
@@ -94,5 +94,5 @@
 	<bean class="org.springframework.data.mongodb.core.MongoTemplate">
 		<constructor-arg ref="mongo" />
 		<constructor-arg name="databaseName" value="db_mongo" />
-	</bean>
+	</bean> -->
 </beans>

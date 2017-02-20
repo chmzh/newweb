@@ -15,17 +15,20 @@ import com.cmz.web1.handler.MyWebSocketHandler;
 
 @Configuration
 @EnableWebSocket
-public class WebSocketConfig extends WebMvcConfigurerAdapter implements WebSocketConfigurer {
-
-	@Bean
-	public MyWebSocketHandler handler(){
-		return new MyWebSocketHandler();
-	}
-
-	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-		registry.addHandler(handler(), "/ws").addInterceptors(new HandShake());
-
-		registry.addHandler(handler(), "/ws/sockjs").addInterceptors(new HandShake()).withSockJS();
-	}
-
+public class WebSocketConfig{
+	
 }
+//public class WebSocketConfig extends WebMvcConfigurerAdapter implements WebSocketConfigurer {
+//
+//	@Bean
+//	public MyWebSocketHandler handler(){
+//		return new MyWebSocketHandler();
+//	}
+//
+//	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+//		registry.addHandler(handler(), "/ws").addInterceptors(new HandShake());
+//
+//		registry.addHandler(handler(), "/ws/sockjs").addInterceptors(new HandShake()).withSockJS();
+//	}
+//
+//}

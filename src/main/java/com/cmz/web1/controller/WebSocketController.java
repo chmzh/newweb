@@ -26,60 +26,66 @@ import groovy.lang.MetaClassImpl.Index;
 @Controller
 @RequestMapping("/websocket/")
 public class WebSocketController {
-	@Resource
-	MyWebSocketHandler handler;
-
-	Map<Long, User> users = new HashMap<Long, User>();
-
-	// 模拟一些数据
-	@ModelAttribute
-	public void setReqAndRes() {
-		User u1 = new User();
-		u1.setId(1L);
-		u1.setName("张三");
-		users.put(u1.getId(), u1);
-
-		User u2 = new User();
-		u2.setId(2L);
-		u2.setName("李四");
-		users.put(u2.getId(), u2);
-
-	}
+	
 	@RequestMapping("index")
-	public ModelAndView Index(){
-		return new ModelAndView("index");
+	public String index(){
+		return "websocketclient";
 	}
 	
-	// 用户登录
-	@RequestMapping(value = "login", method = RequestMethod.POST)
-	public ModelAndView doLogin(User user, HttpServletRequest request) {
-		request.getSession().setAttribute("uid", user.getId());
-		request.getSession().setAttribute("name", users.get(user.getId()).getName());
-		return new ModelAndView("redirect:talk");
-	}
-
-	// 跳转到交谈聊天页面
-	@RequestMapping(value = "talk", method = RequestMethod.GET)
-	public ModelAndView talk() {
-		return new ModelAndView("talk");
-	}
-
-	// 跳转到发布广播页面
-	@RequestMapping(value = "broadcast", method = RequestMethod.GET)
-	public ModelAndView broadcast() {
-		return new ModelAndView("broadcast");
-	}
-
-	// 发布系统广播（群发）
-	@ResponseBody
-	@RequestMapping(value = "broadcast", method = RequestMethod.POST)
-	public void broadcast(String text) throws IOException {
-		Message msg = new Message();
-		msg.setDate(new Date());
-		msg.setFrom(-1L);
-		msg.setFromName("系统广播");
-		msg.setTo(0L);
-		msg.setText(text);
-		handler.broadcast(new TextMessage(new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJson(msg)));
-	}
+//	@Resource
+//	MyWebSocketHandler handler;
+//
+//	Map<Long, User> users = new HashMap<Long, User>();
+//
+//	// 模拟一些数据
+//	@ModelAttribute
+//	public void setReqAndRes() {
+//		User u1 = new User();
+//		u1.setId(1L);
+//		u1.setName("张三");
+//		users.put(u1.getId(), u1);
+//
+//		User u2 = new User();
+//		u2.setId(2L);
+//		u2.setName("李四");
+//		users.put(u2.getId(), u2);
+//
+//	}
+//	@RequestMapping("index")
+//	public ModelAndView Index(){
+//		return new ModelAndView("index");
+//	}
+//	
+//	// 用户登录
+//	@RequestMapping(value = "login", method = RequestMethod.POST)
+//	public ModelAndView doLogin(User user, HttpServletRequest request) {
+//		request.getSession().setAttribute("uid", user.getId());
+//		request.getSession().setAttribute("name", users.get(user.getId()).getName());
+//		return new ModelAndView("redirect:talk");
+//	}
+//
+//	// 跳转到交谈聊天页面
+//	@RequestMapping(value = "talk", method = RequestMethod.GET)
+//	public ModelAndView talk() {
+//		return new ModelAndView("talk");
+//	}
+//
+//	// 跳转到发布广播页面
+//	@RequestMapping(value = "broadcast", method = RequestMethod.GET)
+//	public ModelAndView broadcast() {
+//		return new ModelAndView("broadcast");
+//	}
+//
+//	// 发布系统广播（群发）
+//	@ResponseBody
+//	@RequestMapping(value = "broadcast", method = RequestMethod.POST)
+//	public void broadcast(String text) throws IOException {
+//		Message msg = new Message();
+//		msg.setDate(new Date());
+//		msg.setFrom(-1L);
+//		msg.setFromName("系统广播");
+//		msg.setTo(0L);
+//		msg.setText(text);
+//		handler.broadcast(new TextMessage(new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJson(msg)));
+//	}
 }
