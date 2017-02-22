@@ -6,6 +6,8 @@ import org.joda.time.DateTimeZone;
 import org.joda.time.chrono.GJChronology;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+
+import groovyjarjarasm.asm.tree.IntInsnNode;
 /**
  * 时区参考 http://www.joda.org/joda-time/timezones.html
  * @author chenmingzhou
@@ -13,6 +15,9 @@ import org.joda.time.format.DateTimeFormatter;
  */
 public class DateTimeUtil {
 	public final static String pattern = "yyyy-MM-dd HH:mm:ss";
+	
+	public final static String timezone = "Asia/Shanghai";
+	
 	/**
 	 * 当前时间 yyyy-MM-dd HH:mm:ss
 	 * @param timezone
@@ -39,7 +44,9 @@ public class DateTimeUtil {
 		DateTimeFormatter format = DateTimeFormat.forPattern(pattern);
 		return dt.toString(format);
 	}
-	
+	public static String toDateTime(long millis){
+		return toDateTime(millis, timezone);
+	}
 	/**
 	 * 当前时间戳 毫秒
 	 * @param timezone
@@ -51,6 +58,11 @@ public class DateTimeUtil {
 		DateTime dt = new DateTime(gregorianJuian);
 		return dt.getMillis();
 	}
+	
+	public static long getMillis(){
+		return getMillis(timezone);
+	}
+	
 	/**
 	 * 当前时间戳 秒
 	 * @param timezone
@@ -62,6 +74,11 @@ public class DateTimeUtil {
 		DateTime dt = new DateTime(gregorianJuian);
 		return (int) (dt.getMillis()/1000);
 	}
+	
+	public static int getSeconds(){
+		return getSeconds(timezone);
+	}
+	
 	/**
 	 * 增加相应的天数
 	 * @param someday
@@ -80,7 +97,7 @@ public class DateTimeUtil {
 	 * @return
 	 */
 	public static String curDateTime(){
-		return curDateTime("Asia/Shanghai");
+		return curDateTime(timezone);
 	}
 	
 	
